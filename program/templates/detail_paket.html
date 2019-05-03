@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load staticfiles po_tags %}
+
+{% block title %} PO ALC - {{ paket.nama_paket }} - {{ bidang_full }} {% endblock %}
+
+{% block css %}
+<link href="{% static 'css/paket.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/paket.js' %}"></script>
+{% endblock %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb my-4">
+  <li class="breadcrumb-item">
+    <a href="{% url 'event_index'%}">Program</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="{% url 'event_detail' event.id %}">{{ event.nama_event }}</a>
+  </li>
+  <li class="breadcrumb-item active"> {{ paket.nama_paket }} </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="tabs">
+  <div class="tab-button-outer">
+    <ul id="tab-button">
+      <li><a href="#soal">Soal</a></li>
+      <li><a href="#solusi">Solusi</a></li>
+      <li><a href="#submit">Submit</a></li>
+      <li><a href="#ranking">Ranking</a></li>
+      <li><a href="#diskusi">Diskusi</a></li>
+    </ul>
+  </div>
+  <div class="tab-select-outer">
+    <select id="tab-select">
+      <option value="#soal">Soal</option>
+      <option value="#solusi">Solusi</option>
+      <option value="#submit">Submit</option>
+      <option value="#ranking">Ranking</option>
+      <option value="#diskusi">Diskusi</option>
+    </select>
+  </div>
+
+  <div id="soal" class="tab-contents" style="width: 100%; height: 120vh; position: relative;">
+    {% if event.waktu_download and event.download and paket.mulai %}
+    <div class="alert alert-primary" role="alert">
+    Soal dapat diunduh pada <a href="https://{{request.META.HTTP_HOST}}{{soal.file_soal.url}}">tautan ini</a>
+    </div>
+    {% endif %}
+    {% if guru or paket.mulai %}
+    <iframe src="https://docs.google.com/gview?url={{request.META.HTTP_HOST}}{{soal.file_soal.url}}&embedded=true" style="width:100%; height:700px;" frameborder="0"></iframe>
+    <div style="width: 90px; height: 90px; position: absolute; opacity: 0; right: 0px; top: 0px;">&nbsp;</div>
+    {% else %}
+    <br><br>
+    <p class="text-center">Soal tersedia setelah waktu pengerjaan dimulai<p>
+    {% endif %}
+  </div>
+  <div id="solusi" class="tab-contents" style="width: 100%; height: 120vh; position: relative;">
+    {% if event.waktu_download and event.download and paket.selesai %}
+    <div class="alert alert-primary" role="alert">
+    Soal dapat diunduh pada <a href="https://{{request.META.HTTP_HOST}}{{soal.file_solusi.url}}">tautan ini</a>
+    </div>
+    {% endif %}
+    {% if guru or paket.selesai %}
+    <iframe src="https://docs.google.com/gview?url={{request.META.HTTP_HOST}}{{soal.file_solusi.url}}&embedded=true" style="width:100%; height:700px;" frameborder="0"></iframe>
+    <div style="width: 90px; height: 90px; position: absolute; opacity: 0; right: 0px; top: 0px;">&nbsp;</div>
+    {% else %}
+    <br><br>
+    <p class="text-center">Solusi tersedia setelah waktu pengerjaan selesai<p>
+    {% endif %}
+  </div>
+  <div id="submit" class="tab-contents">
+    <script language="JavaScript">
+        TargetDate = "{{ close_time }}";
+        CountActive = true;
+        CountStepper = -1;
+        LeadingZero = true;
+        DisplayFormat = "Waktu tersisa : %%D%% Hari, %%H%% Jam, %%M%% Menit, %%S%% Detik";
+        FinishMessage = "Waktu Habis!";
+    </script>
+    <script language="JavaScript" src="{% static 'js/countdown.js' %}"></script>
+
+    <form enctype="multipart/form-data" action="" method="post" id="soal_form" novalidate="">
+        {% csrf_token %}
+        <div class="container-fluid">
+            {% for i in range10 %}
+            <div class="row">
+                {% for j in range3 %}
+                {% with hasil=j|grid:i %}
+                <div class="col">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-3 offset-md-3 col-sm-12">
+                          <label {% if soal_dict|get:hasil == '-' %}style="visibility:hidden"{% endif %} class="required" for="id_no{{j|grid:i}}">No{{j|grid:i}}:</label>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                          <select {% if soal_dict|get:hasil == '-' %}style="visibility:hidden"{% endif %} id="id_no{{j|grid:i}}" name="no{{j|grid:i}}">
+                              {% autoescape off %}
+                              {% with hasil=j|grid:i %}
+                                  {{submission_dict|get:hasil|convert}}
+                              {% endwith %}
+                              {% endautoescape %}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                {% endwith %}
+                {% endfor %}
+            </div>
+            {% endfor %}
+            {% if not paket.selesai %}
+            <div class="row">
+              <div class="offset-3 col-6">
+                <br><br>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" name="_save">Save</button>
+              </div>
+            </div>
+            {% endif %}
+        </div>
+    </form>
+  </div>
+  <div id="ranking" class="tab-contents">
+    {% if guru %}
+    <br><br>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Nama Guru</th>
+            <th>Nilai</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{ nama }}
+            </td>
+            <td>
+              {{ nilai }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    {% if paket.selesai %}
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Rank</th>
+            <th>Nama</th>
+            <th>Asal Sekolah</th>
+            <th>Kota</th>
+            <th>Provinsi</th>
+            <th>Nilai</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for peserta in ranking %}
+            <tr>
+              <td>
+                {{ forloop.counter }}
+              </td>
+              <td>
+                {{ peserta.userprofile.nama_lengkap }}
+              </td>
+              <td>
+                {{ peserta.userprofile.asal_sekolah }}
+              </td>
+              <td>
+                {{ peserta.userprofile.kota }}
+              </td>
+              <td>
+                {{ peserta.userprofile.provinsi }}
+              </td>
+              <td>
+                {{ peserta.nilai }}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <br><br>
+    <p class="text-center">Peringkat tersedia setelah waktu pengerjaan selesai<p>
+    {% endif %}
+    
+  </div>
+  <div id="diskusi" class="tab-contents">
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = "{{ request.get_host }}{{ request.get_full_path }}"; 
+        this.page.identifier = "{{ paket.id }}_{{ bidang }}";
+        this.page.title = "{{ paket.nama_paket }} - {{ bidang_full }}";
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = 'https://poalcindonesia.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </div>
+</div>
+{% endblock %}

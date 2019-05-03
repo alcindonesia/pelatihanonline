@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load tz %}
+{% load po_tags %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb my-4">
+  <li class="breadcrumb-item active">Program</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+  <br><br>
+  <div class="row">
+  {% for event in events %}
+    <div class="col-md-3">
+    <div class="card mt-5 text-center">
+      <div class="card-body">
+        <div class="lead">
+          <span class="badge badge-pill 
+          {% if event.status == "Pendaftaran Dibuka" %}
+          badge-success 
+          {% elif event.status == "Program Selesai" %}
+          badge-danger
+          {% else %}
+          badge-info
+          {% endif %}
+          text-center">
+            {{ event.status }}
+          </span>
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ event.nama_event }}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"> {% if event.link_panduan %}<a href="{{ event.link_panduan }}">Download Panduan</a>{% else %} - {% endif %} </li>
+        <li class="list-group-item"> {{ event.jadwal|default_if_none:"-" }} </li>
+      </ul>
+      <div class="card-body">
+        {% if not event.selesai %}
+        <div class="lead">
+          {% if event|accepted:userprofile %}
+            <span class="badge badge-success">Terdaftar</span>
+          {% elif event|registered:userprofile %}
+            <span class="badge badge-warning">Menunggu Persetujuan</span>
+          {% else %}
+            <span class="badge badge-dark">Belum Terdaftar</span>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        {% if event|accepted:userprofile %}
+          <a href="{% url 'event_detail' event.id %}" class="btn btn-primary card-link">Masuk</a>
+        {% elif event|registered:userprofile %}
+          &nbsp;
+        {% elif event.buka and not event.selesai %}
+          <a href="{% url 'event_daftar' event.id %}" class="btn btn-primary card-link">Daftar</a>
+        {% endif %}
+      </div>
+    </div>
+    </div>
+  {% endfor %}
+  </div>
+{% endblock %}

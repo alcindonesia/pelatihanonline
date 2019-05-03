@@ -1,0 +1,188 @@
+{% extends 'base_no_container.html' %}
+{% load staticfiles%}
+
+{% block content %}
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h1 class="mb-5">Selamat Datang di Pelatihan Online ALC Indonesia</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-3 mx-auto">
+            <a href="{% url 'event_index' %}"><button class="btn btn-block btn-lg" style="margin:5px">Lihat Program</button></a>
+            <a href="https://drive.google.com/open?id=1NKo7KC9Y0aiJrIa8Y0JuSlYUBWQgTrfW"><button class="btn btn-block btn-lg" style="margin:5px">Download Panduan</button></a>
+            <a href="https://drive.google.com/open?id=1Zg1HhA4HMB0uT-ZyAb4TpMld47sszW7m"><button class="btn btn-block btn-lg" style="margin:5px">Download Contoh Paket</button></a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Icons Grid -->
+    <section class="features-icons bg-light text-center">
+        <div class="container-fluid">
+            <h2 class="mb-5">Fitur</h2>
+            <div class="row">
+                <div class="col-md-3 col-xs-6 text-center">
+                    <div class="box-feature">
+                        <i class="fa fa-4x fa-book"></i>
+                        <h3>Materi OSN</h3>
+                        <p class="text-muted">Belajar dari 15 paket materi sesuai silabus OSN</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 text-center">
+                    <div class="box-feature">
+                        <i class="fa fa-4x fa-file-pdf-o"></i>
+                        <h3>Soal Latihan</h3>
+                        <p class="text-muted">Berlatih dengan mengerjakan ratusan soal-soal pilihan</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 text-center">
+                    <div class="box-feature">
+                        <i class="fa fa-4x fa-file-text-o"></i>
+                        <h3>Solusi Soal</h3>
+                        <p class="text-muted">Belajar melalui paket pembahasan soal latihan</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 text-center">
+                    <div class="box-feature">
+                        <i class="fa fa-4x fa-newspaper-o"></i>
+                        <h3>Cerita Inspiratif</h3>
+                        <p class="text-muted">Bonus pengalaman inspiratif tutor terbaik ALC</p>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-xs-6 text-center">
+                    <div class="box-feature">
+                        <i class="fa fa-4x fa-paper-plane"></i>
+                        <h3>Input Jawaban</h3>
+                        <p class="text-muted">Input jawaban dengan mudah untuk mengetahui nilai</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 text-center">
+                    <div class="box-feature">
+                        <i class="fa fa-4x fa-bar-chart"></i>
+                        <h3>Ranking Nasional</h3>
+                        <p class="text-muted">Lihat kemampuan anda dengan peserta dari daerah lain</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 text-center">
+                    <div class="box-feature">
+                        <i class="fa fa-4x fa-commenting-o"></i>
+                        <h3>Diskusi</h3>
+                        <p class="text-muted">Diskusi bersama tutor berpengalaman</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6 text-center">
+                    <div class="box-feature">
+                        <i class="fa fa-4x fa-diamond"></i>
+                        <h3>Hadiah</h3>
+                        <p class="text-muted">Hadiah menarik untuk peserta terbaik</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
+      <div class="container">
+        <h2 class="mb-5">Poster PO Gelombang 2</h2>
+        <a href="{% static 'img/poster-po-2019.jpeg' %}"> <img src="{% static 'img/poster-po-2019.jpeg' %}" alt="Poster PO Gelombang 2" class="img-fluid"></a>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
+      <div class="container">
+        <h2 class="mb-5">Tim Penyusun Soal</h2>
+        <a href="{% static 'img/daftar-pembuat-po.jpeg' %}"> <img src="{% static 'img/daftar-pembuat-po.jpeg' %}" alt="Tim Penyusun Soal" class="img-fluid"></a>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
+      <div class="container">
+        <h2 class="mb-5">Testimoni</h2>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="{% static 'img/adella-josephin.png' %}" alt="">
+              <h5>Adella Josephin<br>(SMAN 1 Depok)<br>Emas Kebumian OSN 2017</h5>
+              <p class="font-weight-light mb-0">"Materi di po cukup lengkap kak untuk persiapan osk nya, TO yg diadakan jg cukup membantu karena ada tipe soal yang baru dan sekalian bisa mengukur sudah seberapa kemampuan kita. Hanya kalau untuk osp osn menurutku kurang kak hehe. Sarannya untuk latihan-latihan soal di pelatihan online mungkin bisa dibuat lebih bervariasi lagi, supaya bisa benar-benar mengukur kemampuan masing-masing kita."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="{% static 'img/aryana-paramita.png' %}" alt="">
+              <h5>Aryana Paramita<br>(SMAK 3 Penabur Jakarta)<br>Perak Astronomi OSN 2016</h5>
+              <p class="font-weight-light mb-0">"ALC Indonesia merupakan wadah pertama saya dalam mengerjakan soal-soal secara mandiri. Saya mengikuti program tryout mingguan ALC. Menurut saya, mengerjakan soal yang beragam adalah salah satu cara paling efektif untuk menguasai materi. Saya berterima kasih karena ALC telah sangat berguna dalam membantu saya menciptakan suatu rutinitas belajar. Selain itu, ALC juga memberikan gambaran skor dan posisi seluruh peserta ALC supaya kita dapat mengevaluasi kinerja kita."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="{% static 'img/timotius-jason.png' %}" alt="">
+              <h5>Timotius Jason<br>(SMP IGS Palembang)<br>Perak IJSO 2016, Perak IPA SMP OSN 2016</h5>
+              <p class="font-weight-light mb-0">"Program pertama yang diikuti selama saya bergabung di ALC, sampai berlanjut ke program tatap muka, dan Juara."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="{% static 'img/cindy-pregita.png' %}" alt="">
+              <h5>Cindy Pregita<br>(SMA Don Bosco 3 Bekasi)<br>Perak Ekonomi OSN 2017</h5>
+              <p class="font-weight-light mb-0">"Awalnya tahu tentang pelatihan online ALC itu dari facebook, dan nyesel bgt baru tahunya tahun ini, tahun lalu ga ikut. Langsung daftar deh, ada 10 modul isi materi+soal yang cukup membantu buat persiapan OSN."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="{% static 'img/hafidz-arsy.png' %}" alt="">
+              <h5>Hafidz 'Arsy Tritura Ebsyar<br>(SMAN 1 Payakumbuh)<br>Perunggu Geografi OSN 2017</h5>
+              <p class="font-weight-light mb-0">"Pengalaman saya mengikuti PO ALC, saya memperoleh pengetahuan baru dari bahan-bahan yang diberikan oleh PO ALC, bahan pelajarannya berisikan materi yang singkat, padat dan koheren dengan materi olimpiade."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="{% static 'img/felicia-gillian.png' %}" alt="">
+              <h5>Felicia Gillian Tekad Tuerah<br>(SMAK Eben Haezar Manado)<br>Perak Astronomi OSN 2017</h5>
+              <p class="font-weight-light mb-0">"Pelatihan ALC beda dengan pelatihan online lainnya, di pelatihan ALC kita diberikan materi yang lengkap dan soal-soal serta solusinya. Menurut saya worth it untuk mengikuti pelatihan ALC karena dengan biaya yang murah kita bisa mendapatkan ilmu dan materi yang sangat lengkap."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="{% static 'img/bistamy-m-nursabur.png' %}" alt="">
+              <h5>Bistamy M. Nursabur<br>(SMAIT Ummul Quro Bogor)<br>Perunggu Biologi OSN 2018</h5>
+              <p class="font-weight-light mb-0">"PO untuk OSK 2018, ALC sangat membantu sy dalam memahami berbagai permasalahan yang ada dalam soal. Pokoknya mantap ALC!"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="call-to-action text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+              <a class="bg-primary px-3 py-2 rounded text-white mb-2 d-inline-block"><i class="fa fa-map-marker"></i></a>
+              <p> Jalan Sekepanjang III No.53<br>Kota Bandung</p>
+          </div>
+
+          <div class="col-md-4">
+              <a href="https://api.whatsapp.com/send?phone=6285223273373" class="bg-primary px-3 py-2 rounded text-white mb-2 d-inline-block"><i class="fa fa-phone"></i></a>
+              <a href="https://api.whatsapp.com/send?phone=6285223273373"><p class="lead">Whatsapp : 085223273373</p></a>
+          </div>
+
+          <div class="col-md-4">
+              <a href="http://line.me/ti/p/~@alcindonesia" class="bg-primary px-3 py-2 rounded text-white mb-2 d-inline-block"><i class="fa fa-envelope"></i></a>
+              <a href="http://line.me/ti/p/~@alcindonesia"><p class="lead">Line : @alcindonesia</p></a>
+          </div>
+        </div>    
+      </div>
+    </section>
+{% endblock %}

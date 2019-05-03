@@ -1,0 +1,14 @@
+Django==2.1
+django-cleanup==2.1.0
+django-crispy-forms==1.7.2
+django-debug-toolbar==1.9.1
+django-extensions==2.1.0
+django-modeladmin-reorder==0.3.1
+django-registration-redux==2.4
+graphviz==0.8.4
+Pillow==5.2.0
+pipdeptree==0.13.0
+pyparsing==2.2.0
+pytz==2018.5
+six==1.11.0
+sqlparse==0.2.4

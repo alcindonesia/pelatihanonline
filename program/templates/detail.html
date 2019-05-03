@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb my-4">
+  <li class="breadcrumb-item">
+    <a href="{% url 'event_index'%}">Program</a>
+  </li>
+  <li class="breadcrumb-item active"> {{ event.nama_event }} </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+  *) Paket mungkin akan selalu diperbaharui selama program berjalan
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Nama Paket</th>
+        <th>Waktu Mulai</th>
+        <th>Waktu Selesai</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for paket in pakets %}
+        <tr>
+          <td>
+            <a href="{% url 'event_detail_paket' event.pk paket.pk bidang %}">
+              {{ paket.nama_paket }}
+            </a>
+          </td>
+          <td>
+          	<p>{{ paket.open_time|date:'d-F-Y H:i' }}</p>
+          </td>
+          <td>
+          	<p>{{ paket.close_time|date:'d-F-Y H:i' }}</p>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
